@@ -64,7 +64,7 @@ static void handle_sigint(int sig)
     rl_redisplay();
 }
 
-/*Handles the values for the signals delivereds by the keyboard (EX: SIGINT "signal interruption" = ctr + d), (ex: SIGQUIT "signal quit" = ctr + /)*/
+/*Handles the values for the signals delivereds by the keyboard (EX: SIGINT "signal interruption" = ctr + c), (ex: SIGQUIT "signal quit" = ctr + /)*/
 static void steup_signals(void)
 {
     signal(SIGINT, handle_sigint);
@@ -79,4 +79,5 @@ int main(int argc, char *argv[], char *env[])
         return(1);
     setup_signals();
     loop_shell
+
 }
