@@ -37,11 +37,13 @@ static char    **dup_env(char *env[])
 }
 
 /*Used to save the enviroment variables (why?, ex: at the case there is and unset of one of those variables, y can still find it's locations (supongo)*/
+/*We want to be able to manipulate a list of the variables inside the program, as well as not affect the actual environment variables of the machine*/
+/*This function copies all contents of the env list and passes this as a list the program can then manipulate freely*/
 static int init_shell(t_mshell *shell, char *env[], int argc)
 {
     if (argc != 1)
     {
-        write(1, "Error: no arguments allowed\n", 28);
+        printf("Error: no arguments allowed\n");
         return (1);
     }
     shell->exit_code = 0;
@@ -81,4 +83,5 @@ int main(int argc, char *argv[], char *env[])
     loop_shell
 
 }
+
 
