@@ -17,13 +17,13 @@ typedef struct s_mshell
 
 static char    **dup_env(char *env[])
 {
-    char    *new_env[];
+    char    **new_env;
     int     i;
 
     i = 0;
     while (env[i])
         i++;
-    new_env = malloc(sizeof(char *) * i + 1);
+    new_env = malloc(sizeof(char *) * (i + 1));
     if (!new_env)
         return (NULL);
     i = 0;
@@ -32,7 +32,7 @@ static char    **dup_env(char *env[])
         new_env[i] = ft_strdup(env[i]);
         i++;
     }
-    new_env[i] = '\0';
+    new_env[i] = NULL;
     return (new_env);
 }
 
@@ -81,3 +81,4 @@ int main(int argc, char *argv[], char *env[])
     loop_shell
 
 }
+
