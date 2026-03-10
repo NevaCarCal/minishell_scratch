@@ -43,8 +43,12 @@ typedef struct s_mshell
 
 /**************************************************************END OF LIBRARY***************************************************/
 
+/**************************************************************Tokenizer*******************************************************************/
+get_next_token()
+
 /**************************************************************Parse Input*******************************************************************/
 
+/*Loop */
 static int  parse_loop(t_command *head, char *line, t_mshell *shell)
 {
     t_command   *curr;
@@ -72,6 +76,7 @@ static int  parse_loop(t_command *head, char *line, t_mshell *shell)
     return (1);
 }
 
+/*Starts the list for each command && starts the loop to parse the input*/
 static char *parse_input(line, shell)
 {
     t_command   *head;
@@ -100,7 +105,9 @@ static char *parse_input(line, shell)
    }
 
 /**************************************************************Loop Shell*******************************************************************/
-
+/*  add_history saves log from inputs
+    initialize the parsing of the input
+    initialize the execute of "commands" that have been parsed*/
 static void process_line(char *line, t_minishell *shell)
 {
     t_command   *cmds;
