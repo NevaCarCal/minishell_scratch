@@ -2,7 +2,16 @@
 
 extern int  g_signal;
 
+/**********************************************************Input*******************************************************************/
+typedef struct s_input_info
+{
+	char		*line;
+	int			*i;
+	t_minishell	*shell;
+}	t_input_info;
+
 /**********************************************************Commands*******************************************************************/
+/*Define type of command*/
 typedef enum e_redir_type
 {
 	REDIR_IN,
@@ -34,12 +43,63 @@ typedef struct s_mshell
 
 /**************************************************************END OF LIBRARY***************************************************/
 
+/**************************************************************Parse Input*******************************************************************/
 
-/**************************************************************Loop Shell*******************************************************************/
+static int  parse_loop(t_command *head, char *line, t_mshell *shell)
+{
+    t_command   *curr;
+    char        *token;
+    int         i;
+    t_input_info    info;
+
+    curr = head;
+    i = 0;
+    info.line = line;
+    info.i = &i;
+    info.shell = shell;
+    while (1)
+    {
+        token = get_next_token(&curr, token, &info)
+        if (!token)
+            break ;
+        if (!handle_token (&curr, token, &info))
+        {
+            free(token);
+            return (0);
+        }
+        free(token);
+    }
+    return (1);
+}
+
 static char *parse_input(line, shell)
 {
+    t_command   *head;
+    t_command   *curr;
 
-}
+    head = new_command();
+    if (!head)
+        return (NULL);
+    if (!parse_loop(head,line, shell))
+    {
+        free_commands(head);
+        return (NULL);
+    }
+    if (head && !head->args && !head->redirs && !head->next)
+        return (head);
+    curr = head;
+    while (curr->next)
+        curr = curr->next;
+    if (!curr->args && !curr->redirs)
+    {
+        shell->exit_code = 2;
+        free_commands(head);
+        return (NULL);
+    }
+    return (head);
+   }
+
+/**************************************************************Loop Shell*******************************************************************/
 
 static void process_line(char *line, t_minishell *shell)
 {
@@ -103,9 +163,9 @@ static char    **dup_env(char *env[])
     return (new_env);
 }
 
-/*Used to save the enviroment variables (why?, ex: at the case there is and unset of one of those variables, y can still find it's locations (supongo)*/
-/*We want to be able to manipulate a list of the variables inside the program, as well as not affect the actual environment variables of the machine*/
-/*This function copies all contents of the env list and passes this as a list the program can then manipulate freely*/
+/*Used to save the enviroment variables (why?, ex: at the case there is and unset of one of those variables, y can still find it's locations (supongo)
+We want to be able to manipulate a list of the variables inside the program, as well as not affect the actual environment variables of the machine
+This function copies all contents of the env list and passes this as a list the program can then manipulate freely*/
 static int init_shell(t_mshell *shell, char *env[], int argc)
 {
     if (argc != 1)
