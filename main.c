@@ -44,7 +44,60 @@ typedef struct s_mshell
 /**************************************************************END OF LIBRARY***************************************************/
 
 /**************************************************************Tokenizer*******************************************************************/
-get_next_token()
+static int	get_word_len(char *line)
+{
+	int		i;
+	char	quote;
+
+	i = 0;
+	quote = 0;
+	while (line[i])
+	{
+		ft_update_quote(line[i], &quote);/*revisar si queremos hacerlo asi */
+		if (!quote && is_operator(line[i]))
+			break ;
+		if (!quote && ft_isspace(line[i]))
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+static int	get_operator_len(char *line)
+{
+	if (!line || !*line)
+		return (0);
+	if (line[0] == '>' && line[1] == '>')
+		return (2);
+	if (line[0] == '<' && line[1] == '<')
+		return (2);
+	return (1);
+}
+
+/* tokenizer ?¿ dos opciones palabras o operadores, needed aqui? o asignar en la lista de cmd, si es operador
+ o comand olo que sea? posible replanteazion de eso para facilitar lo que aun no esta corregido? */
+char	*get_next_token(char *line, int *idx)
+{
+	int		start;
+	int		len;
+	char	*token;
+
+	while (line[*idx] && ft_isspace(line[*idx]))
+		(*idx)++;
+	if (!line[*idx])
+		return (NULL);
+	start = *idx;
+	if (is_operator(line[*idx]))
+		len = get_operator_len(line + *idx);
+	else
+		len = get_word_len(line + *idx);
+	token = malloc(sizeof(char) * (len + 1));
+	if (!token)
+		return (NULL);
+	ft_strlcpy(token, line + start, len + 1);
+	*idx += len;
+	return (token);
+}
 
 /**************************************************************Parse Input*******************************************************************/
 
