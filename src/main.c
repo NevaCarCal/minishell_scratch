@@ -128,7 +128,7 @@ static char *parse_input(line, shell)
 /*  add_history saves log from inputs
 	initialize the parsing of the input
 	initialize the execute of "commands" that have been parsed*/
-static void process_line(char *line, t_minishell *shell)
+static void process_line(char *line, t_mshell *shell)
 {
 	t_command *cmds;
 

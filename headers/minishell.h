@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 13:42:49 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/14 14:09:04 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/14 14:13:38 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 # include <stdio.h>
 # include <stdlib.h>
+# include <signal.h>
 #endif
 
 /*Libraries*/
