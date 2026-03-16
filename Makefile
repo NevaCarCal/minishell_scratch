@@ -6,7 +6,7 @@
 #    By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/14 13:41:25 by ncarrera          #+#    #+#              #
-#    Updated: 2026/03/16 13:51:26 by ncarrera         ###   ########.fr        #
+#    Updated: 2026/03/16 14:45:31 by ncarrera         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ LDFLAGS = -lreadline -L./libft -lft
 
 # Libft and project declarations
 LIBFT = ./libft/libft.a
-SRCS =	./src/main.c ./src/token_handler.c
-		./src/commands/cmd_parsing.c ./src/commands/cmd_execution.c
+SRCS =	./src/main.c ./src/token_handler.c \
+		./src/commands/cmd_parsing.c ./src/commands/cmd_execution.c \
 		./src/shell/shell_loop.c
 
 OBJS = $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 10:21:23 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 13:51:33 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:47:44 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	**dup_env(char **env)
 	while (env[i])
 	{
 		new_env[i] = ft_strdup(env[i]);
-		i;
+		i++;
 	}
 	new_env[i] = NULL;
 	return (new_env);
@@ -39,6 +39,7 @@ void	free_env(char **env)
 {
 	int	i;
 
+	i = 0;
 	if (!env)
 		return ;
 	while (env[i])
@@ -62,16 +63,16 @@ static void	process_line(char *line, t_mshell *shell)
 		cmds = parse_input(line, shell);
 		if (cmds)
 		{
-
 		}
 	}
+	free(line);
 }
 
 /*	Checks and returns if user passes any arguments to minishell.
 	Duplicates the current environment variables and adds them to shell struct.
 	This allows minishell to manipulate, remove or add environment variables
 	to its own list without altering the original one.*/
-static int init_shell(t_mshell *shell, char **env, int argc)
+int init_shell(t_mshell *shell, char **env, int argc)
 {
 	if (argc != 1)
 	{
@@ -92,11 +93,11 @@ void	loop_shell(t_mshell *shell)
 	while (1)
 	{
 		line = readline("\001\033[1;35m\002minishell"
-						"\001\033[1;36m\002$ \001\033[0m\002");
+				"\001\033[1;36m\002$ \001\033[0m\002");
 		if (!line)
 		{
 			printf("exit\n");
-			break;
+			break ;
 		}
 		process_line(line, shell);
 		if (g_signal != 0)

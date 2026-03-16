@@ -12,28 +12,6 @@
 
 #include "minishell.h"
 
-static char **dup_env(char *env[])
-{
-	char **new_env;
-	int i;
-
-	i = 0;
-	while (env[i])
-		i++;
-	new_env = malloc(sizeof(char *) * (i + 1));
-	if (!new_env)
-		return (NULL);
-	i = 0;
-	while (env[i])
-	{
-		new_env[i] = ft_strdup(env[i]);
-		i++;
-	}
-	new_env[i] = NULL;
-	return (new_env);
-}
-
-/* Main */
 int g_signal = 0;
 
 /*Handles sigint as specified in subject*/
@@ -53,12 +31,16 @@ static void	setup_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-int	main(int argc, char *argv[], char *env[])
+int	main(int argc, char **argv, char **env)
 {
 	t_mshell	shell;
 
-	if (init_shell(argc, env, &shell))
+	(void)argv;
+	if (init_shell(&shell, env, argc))
 		return (1);
 	setup_signals();
 	loop_shell(&shell);
+	rl_clear_history();
+	free_env(shell.env);
+	return (shell.exit_code);
 }

@@ -6,11 +6,16 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 10:10:52 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 14:02:23 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:50:37 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// Stubs for currently unimplemented functions
+int redir_token(t_command **curr, char *token, t_input_info *info) { (void)curr; (void)token; (void)info; return 1; }
+void add_argument(t_command *cmd, char *arg, t_mshell *shell) { (void)cmd; (void)arg; (void)shell; }
+void free_commands(t_command *cmd) { (void)cmd; }
 
 static int	handle_token(t_command **curr, char *token, t_input_info *info)
 {
@@ -49,7 +54,7 @@ static int	parse_loop(t_command *head, char *line, t_mshell *shell)
 	info.shell = shell;
 	while (1)
 	{
-		token = get_next_token(&curr, &i);
+		token = get_next_token(line, &i);
 		if (!token)
 			break;
 		if (!handle_token(&curr, token, &info))
@@ -63,7 +68,7 @@ static int	parse_loop(t_command *head, char *line, t_mshell *shell)
 }
 
 /*	Starts the list for each command && starts the loop to parse the input*/
-char	*parse_input(char *line, t_mshell *shell)
+t_command	*parse_input(char *line, t_mshell *shell)
 {
 	t_command	*head;
 	t_command	*curr;

@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 10:09:31 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 11:56:42 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:49:05 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 int	is_operator(char c)
 {
 	return (c == '|' || c == '<' || c == '>');
+}
+
+void	ft_update_quote(char c, char *state)
+{
+	if (c == '\'' || c == '\"')
+	{
+		if (*state == 0)
+			*state = c;
+		else if (*state == c)
+			*state = 0;
+	}
 }
 
 static int	get_word_len(char *line)
@@ -28,9 +39,9 @@ static int	get_word_len(char *line)
 	{
 		ft_update_quote(line[i], &quote); /*revisar si queremos hacerlo asi */
 		if (!quote && is_operator(line[i]))
-			break;
+			break ;
 		if (!quote && ft_isspace(line[i]))
-			break;
+			break ;
 		i++;
 	}
 	return (i);

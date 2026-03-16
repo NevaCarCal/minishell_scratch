@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 14:25:02 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 14:31:58 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:35:05 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*	Check if *var exists within **env. Returns the index of var if found.
 	If *var is not found, returns -1.*/
-int	env_var_exists(char *var, char **env)
+static int	env_var_exists(char *var, char **env)
 {
 	int	i;
 	int	len;

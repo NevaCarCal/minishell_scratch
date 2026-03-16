@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 13:42:49 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 14:18:58 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:50:39 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
-#endif
+
 
 /*Libraries*/
 
-extern int	g_signal;
+extern int g_signal;
 
 /*Environment*/
-typedef struct	s_mshell
+typedef struct s_mshell
 {
 	char	**env;
 	int		exit_code;
 }	t_mshell;
 
 /*Input*/
-typedef struct	s_input_info
+typedef struct s_input_info
 {
 	char		*line;
 	int			*i;
@@ -42,7 +42,7 @@ typedef struct	s_input_info
 
 /*Commands*/
 /*Define type of command*/
-typedef enum	e_redir_type
+typedef enum e_redir_type
 {
 	REDIR_IN,
 	REDIR_OUT,
@@ -50,14 +50,14 @@ typedef enum	e_redir_type
 	REDIR_HEREDOC,
 }	t_redir_type;
 
-typedef struct	s_redir
+typedef struct s_redir
 {
 	t_redir_type	type;
 	char			*file;
 	struct s_redir	*next;
 }	t_redir;
 
-typedef struct	s_command
+typedef struct s_command
 {
 	char				**args;
 	t_redir				*redirs;
@@ -66,14 +66,18 @@ typedef struct	s_command
 
 /*Shell*/
 void		loop_shell(t_mshell *shell);
+int			init_shell(t_mshell *shell, char **env, int argc);
+void		free_env(char **env);
 
 /*Line tools*/
 int			is_operator(char c);
 char		*get_next_token(char *line, int *idx);
-char		*parse_input(char *line, t_mshell *shell);
+t_command	*parse_input(char *line, t_mshell *shell);
 int			is_builtin(char *cmd);
 
 /*Command tools*/
 t_command	*new_command(void);
 void		clean_empty_cmd(t_command *cmd);
 void		exec_single_builtin(t_command *cmd, t_mshell *shell);
+
+#endif
