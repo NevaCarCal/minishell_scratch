@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 10:10:52 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 10:38:22 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 11:34:06 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,6 @@
 /* tokenizer ?¿ dos opciones palabras o operadores, needed aqui? o asignar
 en la lista de cmd, si es operador o comand olo que sea? posible replanteazion
 de eso para facilitar lo que aun no esta corregido? */
-static char	*get_next_token(char *line, int *idx)
-{
-	int		start;
-	int		len;
-	char	*token;
-
-	while (line[*idx] && ft_isspace(line[*idx]))
-		(*idx)++;
-	if (!line[*idx])
-		return (NULL);
-	start = *idx;
-	if (is_operator(line[*idx]))
-		len = get_operator_len(line + *idx);
-	else
-		len = get_word_len(line + *idx);
-	token = malloc(sizeof(char) * (len + 1));
-	if (!token)
-		return (NULL);
-	ft_strlcpy(token, line + start, len + 1);
-	*idx += len;
-	return (token);
-}
 
 static int	handle_token(t_command **curr, char *token, t_input_info *info)
 {
