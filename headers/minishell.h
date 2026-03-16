@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 13:42:49 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 11:33:50 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 11:53:13 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ typedef struct	s_command
 }	t_command;
 
 /*Shell*/
-void	loop_shell(t_mshell *shell);
+void		loop_shell(t_mshell *shell);
 
 /*Line tools*/
-int		is_operator(char c);
-char	*get_next_token(char *line, int *idx);
+int			is_operator(char c);
+char		*get_next_token(char *line, int *idx);
+
+/*Command tools*/
+t_command	*new_command(void);

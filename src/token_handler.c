@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 10:09:31 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 11:34:20 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 11:56:42 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ static int	get_word_len(char *line)
 	return (i);
 }
 
-/*This current code and what uses it is prone to failure since there are no
-checks on whether the passed input is valid (For example, the oprators
-could be something like >< which if passed could cause issues.)*/
+/*	This current code and what uses it is prone to failure since there
+	are no checks on whether the passed input is valid (For example,
+	the oprators could be something like >< which if passed
+	could cause issues.)*/
 static int	get_operator_len(char *line)
 {
 	if (!line || !*line)
@@ -50,10 +51,10 @@ static int	get_operator_len(char *line)
 	return (1);
 }
 
-/*Extracts the next token (Operator, word, char, etc.) from the line
-starting at idx. It skips leading whitespaces and allocates memory for
-the returned token. Idx is updated after the token is extracted.
-Returns NULL on malloc failure or the end of the line is reached.*/
+/*	Extracts the next token (Operator, word, char, etc.) from the line
+	starting at idx. It skips leading whitespaces and allocates memory for
+	the returned token. Idx is updated after the token is extracted.
+	Returns NULL on malloc failure or the end of the line is reached.*/
 char	*get_next_token(char *line, int *idx)
 {
 	int		start;

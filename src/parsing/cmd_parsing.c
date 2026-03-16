@@ -6,15 +6,11 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 10:10:52 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 11:34:06 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 11:55:36 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/* tokenizer ?¿ dos opciones palabras o operadores, needed aqui? o asignar
-en la lista de cmd, si es operador o comand olo que sea? posible replanteazion
-de eso para facilitar lo que aun no esta corregido? */
 
 static int	handle_token(t_command **curr, char *token, t_input_info *info)
 {
@@ -112,4 +108,19 @@ static void	process_line(char *line, t_mshell *shell)
 		}
 	}
 	free(line);
+}
+
+/*	Allocates memory for, initializes and returns a cmd structure.
+	Will return NULL on malloc failure.*/
+t_command	*new_command(void)
+{
+	t_command *cmd;
+
+	cmd = malloc(sizeof(t_command));
+	if (!cmd)
+		return (NULL);
+	cmd->args = NULL;
+	cmd->redirs = NULL;
+	cmd->next = NULL;
+	return (cmd);
 }
