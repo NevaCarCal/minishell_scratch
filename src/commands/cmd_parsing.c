@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 10:10:52 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 11:55:36 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 13:58:33 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	handle_token(t_command **curr, char *token, t_input_info *info)
 	return (1);
 }
 
-/*Loop */
+/*Loop*/
 static int	parse_loop(t_command *head, char *line, t_mshell *shell)
 {
 	t_command		*curr;
@@ -63,7 +63,7 @@ static int	parse_loop(t_command *head, char *line, t_mshell *shell)
 }
 
 /*Starts the list for each command && starts the loop to parse the input*/
-static char	*parse_input(char *line, t_mshell *shell)
+char	*parse_input(char *line, t_mshell *shell)
 {
 	t_command	*head;
 	t_command	*curr;
@@ -90,26 +90,6 @@ static char	*parse_input(char *line, t_mshell *shell)
 	return (head);
 }
 
-/*  add_history saves log from inputs
-	initialize the parsing of the input
-	initialize the execute of "commands" that have been parsed*/
-static void	process_line(char *line, t_mshell *shell)
-{
-	t_command	*cmds;
-
-	if (*line)
-	{
-		add_history(line);
-		cmds = parse_input(line, shell);
-		if (cmds)
-		{
-			execute_command(shell, cmds);
-			free_commands(cmds);
-		}
-	}
-	free(line);
-}
-
 /*	Allocates memory for, initializes and returns a cmd structure.
 	Will return NULL on malloc failure.*/
 t_command	*new_command(void)
@@ -123,4 +103,23 @@ t_command	*new_command(void)
 	cmd->redirs = NULL;
 	cmd->next = NULL;
 	return (cmd);
+}
+
+/*	Handles case where first command is empty (i.e. "| ls").
+	Shifts all following arguments forward by one if more than one
+	command is present, and the first one is empty.*/
+void	clean_empty_cmd(t_command *cmd)
+{
+	int	i;
+
+	if (cmd->args && cmd->args[0] && !*cmd->args[0] && cmd->args[1])
+	{
+		i = 0;
+		while (cmd->args[i + 1])
+		{
+			cmd->args[i] = cmd->args[i + 1];
+			i++;
+		}
+		cmd->args[i] = NULL;
+	}
 }

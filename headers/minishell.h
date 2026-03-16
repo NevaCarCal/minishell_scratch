@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 13:42:49 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 11:53:13 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 13:34:38 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <signal.h>
+# include <sys/wait.h>
+# include <readline/history.h>
+# include "../libft/libft.h"
 #endif
 
 /*Libraries*/
@@ -66,6 +69,7 @@ void		loop_shell(t_mshell *shell);
 /*Line tools*/
 int			is_operator(char c);
 char		*get_next_token(char *line, int *idx);
+char		*parse_input(char *line, t_mshell *shell);
 
 /*Command tools*/
 t_command	*new_command(void);
