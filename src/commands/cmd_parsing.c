@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 10:10:52 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 13:58:33 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:02:23 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	parse_loop(t_command *head, char *line, t_mshell *shell)
 	return (1);
 }
 
-/*Starts the list for each command && starts the loop to parse the input*/
+/*	Starts the list for each command && starts the loop to parse the input*/
 char	*parse_input(char *line, t_mshell *shell)
 {
 	t_command	*head;

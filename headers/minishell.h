@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 13:42:49 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 13:34:38 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:18:58 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
 #endif
@@ -70,6 +71,9 @@ void		loop_shell(t_mshell *shell);
 int			is_operator(char c);
 char		*get_next_token(char *line, int *idx);
 char		*parse_input(char *line, t_mshell *shell);
+int			is_builtin(char *cmd);
 
 /*Command tools*/
 t_command	*new_command(void);
+void		clean_empty_cmd(t_command *cmd);
+void		exec_single_builtin(t_command *cmd, t_mshell *shell);
