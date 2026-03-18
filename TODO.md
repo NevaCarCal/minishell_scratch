@@ -2,7 +2,7 @@
 
 ## Core Display & Execution
 - [x] Display a prompt when waiting for a new command
-- [ ] Have a working history
+- [x] Have a working history
 - [ ] Search and launch the right executable (PATH, relative, absolute)
 
 ## Signal Handling & Globals
