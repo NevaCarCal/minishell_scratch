@@ -6,17 +6,19 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 10:09:31 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 14:49:05 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/18 14:09:46 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*	Returns 1 if the character is an operator, 0 otherwise.*/
 int	is_operator(char c)
 {
 	return (c == '|' || c == '<' || c == '>');
 }
 
+/*	Helper function for the program to know if it is inside a quote.*/
 void	ft_update_quote(char c, char *state)
 {
 	if (c == '\'' || c == '\"')
@@ -28,6 +30,9 @@ void	ft_update_quote(char c, char *state)
 	}
 }
 
+/*	Returns the length of the next word in *line.
+	A word is defined as a sequence of characters that are not
+	operators or whitespace.*/
 static int	get_word_len(char *line)
 {
 	int		i;
@@ -37,7 +42,7 @@ static int	get_word_len(char *line)
 	quote = 0;
 	while (line[i])
 	{
-		ft_update_quote(line[i], &quote); /*revisar si queremos hacerlo asi */
+		ft_update_quote(line[i], &quote);
 		if (!quote && is_operator(line[i]))
 			break ;
 		if (!quote && ft_isspace(line[i]))

@@ -6,12 +6,14 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 14:03:23 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 14:23:43 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/18 14:03:09 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*	Enters the heredoc loop, displaying ">". Every time it reads, it checks for
+	the delimiter. If the line is not the delimiter, it writes it into the fd.*/
 static void	read_heredoc_loop(int fd, char *delimiter)
 {
 	char	*line;
@@ -32,6 +34,9 @@ static void	read_heredoc_loop(int fd, char *delimiter)
 	}
 }
 
+/*	Creates a temporary file to store the heredoc (<<) content.
+	Runs unlink() to remove the file, which still keeps the data until
+	the fd is closed.*/
 static int	handle_heredoc(char *delimiter)
 {
 	int		fd;
@@ -91,6 +96,7 @@ static int	handle_redirections(t_redir *redirs)
 	return (1);
 }
 
+/*	Calls the appropriate builtin function based on the command name.*/
 static void	exec_builtin(t_mshell *shell, char **args)
 {
 	if (ft_strncmp(args[0], "cd", 3) == 0)

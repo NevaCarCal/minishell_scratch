@@ -24,7 +24,10 @@ static void handle_sigint(int sig)
 	rl_redisplay();
 }
 
-/*Handles the values for the signals delivereds by the keyboard (EX: SIGINT "signal interruption" = ctr + c), (ex: SIGQUIT "signal quit" = ctr + /)*/
+/*	Tells minishell how to handle the signals
+	delivered to the program.
+	(EX: SIGINT "signal interruption" = ctr + c),
+	(ex: SIGQUIT "signal quit" = ctr + /)*/
 static void	setup_signals(void)
 {
 	signal(SIGINT, handle_sigint);

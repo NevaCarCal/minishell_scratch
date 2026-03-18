@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:30:09 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 14:50:55 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/18 14:03:53 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	wait_all(pid_t last_pid, t_mshell *shell)
 		;
 }
 
+/*	Returns the next pipe if it exists, otherwise returns NULL.*/
 static int	*get_next_pipe(t_command *cmd, int *pip)
 {
 	if (cmd->next)
@@ -43,6 +44,9 @@ static int	*get_next_pipe(t_command *cmd, int *pip)
 	return (NULL);
 }
 
+/*	Executes the command line by iterating through each command in the list.
+	Creates pipes between commands and handles parent and child processes.
+	Waits for the last command to finish and saves its exit code.*/
 void	execute_command(t_mshell *shell, t_command *cmd)
 {
 	int		prev_fd;

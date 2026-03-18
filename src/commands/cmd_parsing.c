@@ -6,7 +6,7 @@
 /*   By: ncarrera <ncarrera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 10:10:52 by ncarrera          #+#    #+#             */
-/*   Updated: 2026/03/16 14:50:37 by ncarrera         ###   ########.fr       */
+/*   Updated: 2026/03/18 14:05:05 by ncarrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int redir_token(t_command **curr, char *token, t_input_info *info) { (void)curr;
 void add_argument(t_command *cmd, char *arg, t_mshell *shell) { (void)cmd; (void)arg; (void)shell; }
 void free_commands(t_command *cmd) { (void)cmd; }
 
+/*	Handles each token based on its type. Handles things like
+	pipes, redirections and arguments.*/
 static int	handle_token(t_command **curr, char *token, t_input_info *info)
 {
 	if (ft_strncmp(token, "|", 2) == 0)
